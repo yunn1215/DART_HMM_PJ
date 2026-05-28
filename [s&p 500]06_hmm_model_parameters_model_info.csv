@@ -1,0 +1,2 @@
+﻿model_id,feature_list,n_features,n_states,covariance_type,n_iter,converged,log_likelihood,n_parameters,AIC,BIC,n_train
+M1_sp500,['sp500_log_return'],1,3,diag,1000,TRUE,-434.4246,14,896.8493,950.7398,347

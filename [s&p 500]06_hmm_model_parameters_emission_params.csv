@@ -1,0 +1,4 @@
+﻿state_raw,regime_label,feature,emission_mean_orig_scale,emission_std_orig_scale
+0,Bull,sp500_log_return,0.013937,0.018466
+1,Recovery,sp500_log_return,-0.007141,0.054219
+2,Bear,sp500_log_return,-0.032143,0.005222

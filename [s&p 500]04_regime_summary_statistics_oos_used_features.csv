@@ -1,0 +1,4 @@
+﻿regime_label,n_months,share_pct,mean_sp500_log_return,std_sp500_log_return
+Bull,66,75,0.02093,0.019154
+Recovery,17,19.32,-0.016057,0.07363
+Bear,5,5.68,-0.022307,0.021332
