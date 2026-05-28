@@ -1,0 +1,2 @@
+﻿model_id,feature_list,n_features,n_states,covariance_type,n_iter,converged,log_likelihood,n_parameters,AIC,BIC,n_train
+M2_sp500_credit,"['sp500_log_return', 'credit_spread']",2,3,diag,1000,True,-603.0476,20,1246.0951,1323.0816,347

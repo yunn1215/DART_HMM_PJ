@@ -1,0 +1,4 @@
+﻿regime_label,n_months,share_pct,mean_sp500_log_return,std_sp500_log_return,mean_vix_eom,std_vix_eom,mean_term_spread,std_term_spread,mean_credit_spread,std_credit_spread
+Bull,114,32.85,0.013125,0.023223,16.059298,5.403064,1.659474,0.950751,0.662193,0.061049
+Recovery,150,43.23,0.00744,0.026489,17.758067,4.996614,1.607133,1.283429,0.8998,0.086292
+Bear,83,23.92,-0.007113,0.054212,26.52241,8.773152,2.32506,0.735886,1.439518,0.538088
