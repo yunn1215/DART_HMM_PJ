@@ -1,0 +1,2 @@
+﻿model_id,feature_list,n_features,n_states,covariance_type,n_iter,converged,log_likelihood,n_parameters,AIC,BIC,n_train
+M2_sp500_term,"['sp500_log_return', 'term_spread']",2,3,diag,1000,TRUE,-691.9450000000001,20,1423.89,1500.8765,347
