@@ -1,0 +1,9 @@
+﻿model_id,model_name,n_features,feature_list,n_states,covariance_type,in_sample_start,in_sample_end,oos_start,oos_end
+M4_all,S&P500 + VIX + Term Spread + Credit Spread,4,"sp500_log_return, vix_eom, term_spread, credit_spread",3,diag,1990-01,2018-12,2019-01,2026-04
+M3_sp500_vix_term,S&P500 + VIX + Term Spread,3,"sp500_log_return, vix_eom, term_spread",3,diag,1990-01,2018-12,2019-01,2026-04
+M3_sp500_vix_credit,S&P500 + VIX + Credit Spread,3,"sp500_log_return, vix_eom, credit_spread",3,diag,1990-01,2018-12,2019-01,2026-04
+M3_sp500_term_credit,S&P500 + Term Spread + Credit Spread,3,"sp500_log_return, term_spread, credit_spread",3,diag,1990-01,2018-12,2019-01,2026-04
+M2_sp500_vix,S&P500 + VIX,2,"sp500_log_return, vix_eom",3,diag,1990-01,2018-12,2019-01,2026-04
+M2_sp500_term,S&P500 + Term Spread,2,"sp500_log_return, term_spread",3,diag,1990-01,2018-12,2019-01,2026-04
+M2_sp500_credit,S&P500 + Credit Spread,2,"sp500_log_return, credit_spread",3,diag,1990-01,2018-12,2019-01,2026-04
+M1_sp500,S&P500 only,1,sp500_log_return,3,diag,1990-01,2018-12,2019-01,2026-04

@@ -1,0 +1,9 @@
+﻿model_id,name,n_features,feature_list,n_train,n_oos,converged,log_likelihood,n_parameters,AIC,BIC,min_regime_share_insample,max_self_transition_prob,mean_duration_by_state,interpretation_note,AIC_rank,BIC_rank
+M1_sp500,S&P500 only,1,sp500_log_return,347,88,True,-434.4246,14,896.8493,950.7398,0.0519,0.909,"{'Bear': 1.0, 'Recovery': 8.4, 'Bull': 11.0}",Single-variable model: regime labeling based on returns only,1,1
+M2_sp500_credit,S&P500 + Credit Spread,2,"sp500_log_return, credit_spread",347,88,True,-603.0476,20,1246.0951,1323.0816,0.2392,0.9348,"{'Bear': 12.6, 'Recovery': 9.7, 'Bull': 15.3}",OK,2,2
+M2_sp500_vix,S&P500 + VIX,2,"sp500_log_return, vix_eom",347,88,True,-661.3264,20,1362.6528,1439.6393,0.098,0.9579,"{'Bear': 3.5, 'Recovery': 8.0, 'Bull': 23.7}",OK,3,3
+M2_sp500_term,S&P500 + Term Spread,2,"sp500_log_return, term_spread",347,88,True,-691.945,20,1423.89,1500.8765,0.2968,0.9708,"{'Bear': 34.2, 'Recovery': 25.4, 'Bull': 12.8}",OK,4,4
+M3_sp500_vix_credit,S&P500 + VIX + Credit Spread,3,"sp500_log_return, vix_eom, credit_spread",347,88,True,-927.4865,26,1906.973,2007.0555,0.0461,0.9678,"{'Bear': 3.7, 'Recovery': 14.3, 'Bull': 31.1}",WARNING: at least one regime has <5% IS share,5,5
+M3_sp500_term_credit,S&P500 + Term Spread + Credit Spread,3,"sp500_log_return, term_spread, credit_spread",347,88,True,-1014.9774,26,2081.9547,2182.0372,0.2161,0.9801,"{'Bear': 12.4, 'Recovery': 50.3, 'Bull': 21.5}",OK,6,6
+M3_sp500_vix_term,S&P500 + VIX + Term Spread,3,"sp500_log_return, vix_eom, term_spread",347,88,True,-1103.9686,26,2259.9372,2360.0197,0.196,0.9774,"{'Bear': 13.6, 'Recovery': 44.3, 'Bull': 24.4}",OK,7,7
+M4_all,S&P500 + VIX + Term Spread + Credit Spread,4,"sp500_log_return, vix_eom, term_spread, credit_spread",347,88,True,-1374.3144,32,2812.6289,2935.8073,0.2594,0.9775,"{'Bear': 18.4, 'Recovery': 23.9, 'Bull': 44.5}",OK,8,8
