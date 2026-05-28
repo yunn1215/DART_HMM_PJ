@@ -1,0 +1,105 @@
+# HMM 입력변수 조합 비교 요약 리포트
+
+생성일: 2026-05-28 14:47
+
+---
+
+## 1. 분석 목적
+
+미국 시장의 거시·시장 변수를 이용해 3-state Gaussian HMM으로 시장 레짐을 분류하고,
+총 8개의 입력변수 조합에 대해 모델 적합도(AIC, BIC) 및 레짐 분류 결과를 비교한다.
+
+---
+
+## 2. 비교한 모델 목록
+
+| Model ID | 변수 구성 |
+|----------|---------|
+| M4_all | S&P500 + VIX + Term Spread + Credit Spread |
+| M3_sp500_vix_term | S&P500 + VIX + Term Spread |
+| M3_sp500_vix_credit | S&P500 + VIX + Credit Spread |
+| M3_sp500_term_credit | S&P500 + Term Spread + Credit Spread |
+| M2_sp500_vix | S&P500 + VIX |
+| M2_sp500_term | S&P500 + Term Spread |
+| M2_sp500_credit | S&P500 + Credit Spread |
+| M1_sp500 | S&P500 only |
+
+---
+
+## 3. AIC / BIC 기준 모델 비교
+
+| Model | n_feat | logL | AIC | BIC | AIC_rank | BIC_rank |
+|-------|--------|------|-----|-----|----------|----------|
+| M1_sp500 | 1 | -434.42 | 896.85 | 950.74 | 1 | 1 |
+| M2_sp500_credit | 2 | -603.05 | 1246.10 | 1323.08 | 2 | 2 |
+| M2_sp500_vix | 2 | -661.33 | 1362.65 | 1439.64 | 3 | 3 |
+| M2_sp500_term | 2 | -691.95 | 1423.89 | 1500.88 | 4 | 4 |
+| M3_sp500_vix_credit | 3 | -927.49 | 1906.97 | 2007.06 | 5 | 5 |
+| M3_sp500_term_credit | 3 | -1014.98 | 2081.95 | 2182.04 | 6 | 6 |
+| M3_sp500_vix_term | 3 | -1103.97 | 2259.94 | 2360.02 | 7 | 7 |
+| M4_all | 4 | -1374.31 | 2812.63 | 2935.81 | 8 | 8 |
+
+- **AIC 최저 모델**: `M1_sp500`
+- **BIC 최저 모델**: `M1_sp500`
+
+> **주의:** AIC/BIC가 낮을수록 상대적으로 선호되지만, 이것만으로 최종 모델을 기계적으로 선택하면 안 된다.
+> 입력변수가 줄어들면 파라미터 수가 감소해 BIC에서 유리할 수 있다.
+> 반대로 변수가 많으면 적합도는 높아지나 과적합 가능성이 있다.
+
+---
+
+## 4. 레짐 해석 가능성 요약
+
+각 모델의 레짐 라벨은 in-sample 구간에서 sp500_log_return 평균을 기준으로 부여됨
+(오름차순: Bear -> Recovery -> Bull).
+
+- 4변수·3변수 모델: VIX 및 credit_spread를 통해 stress 상태를 보조적으로 확인 가능
+- 2변수(sp500+VIX): 공포 지수와 수익률 결합으로 Bull/Bear 구분
+- 2변수(sp500+term): 수익률 곡선 기울기 활용
+- 2변수(sp500+credit): 신용위험 반영
+- **단일변수(M1_sp500)**: 수익률 분포만으로 레짐 분류, 경제적 해석 가장 제한적
+
+---
+
+## 5. 전이확률 및 평균 지속기간 비교
+
+각 모델별 상세 전이확률과 평균 지속기간은
+`outputs/{model_id}/05_transition_matrix.xlsx` 및
+`outputs/{model_id}/07_hmm_result_summary.md` 참조.
+
+---
+
+## 6. OOS Viterbi 결과 비교 요약
+
+각 모델의 OOS 레짐 분류 결과는 `outputs/{model_id}/03_oos_viterbi_regime_classification.xlsx` 참조.
+타임라인 그래프는 `figures/{model_id}/fig_02_oos_viterbi_regime_timeline.png` 참조.
+
+> **중요:** OOS Viterbi 결과는 OOS 전체 관측값을 이용해 **사후적으로** hidden state sequence를
+> 추정한 것이다. 실시간 투자 예측과 구분해야 한다.
+
+---
+
+## 7. 주의가 필요한 모델
+
+- min_regime_share < 5%인 모델: 특정 레짐에 관측치가 너무 적어 통계적 추정이 불안정
+- p_ii >= 0.999인 모델: 자기전이확률이 너무 높아 지속기간 계산 불안정
+- 상세 경고는 `00_model_comparison_aic_bic.xlsx`의 `interpretation_note` 컬럼 참조
+
+---
+
+## 8. 한계점
+
+1. OOS Viterbi는 사후적 분류이며, 실시간 투자 신호로 직접 사용 불가
+   -> 실투에는 filtered posterior 또는 sequential updating 필요
+2. 이번 분석은 레짐 분류에만 집중하며, ETF 성과분석·백테스트는 수행하지 않음
+3. Diagonal covariance 가정으로 변수 간 공분산 무시
+4. 모든 모델은 동일한 master dataset의 교집합 기간을 사용
+
+---
+
+## 9. 이후 확장 가능성
+
+- Filtered posterior 기반 실시간 레짐 예측 및 6월 2026 국면 예측
+- 레짐별 섹터 ETF 성과 분석 및 동적 포트폴리오 구성
+- 최적 n_states 탐색 (BIC 기준 2/3/4 비교)
+- Regime-switching GARCH 모델과의 결합
